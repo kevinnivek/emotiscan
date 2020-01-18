@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 import cv2
 import sys
 import face_recognition
@@ -34,73 +33,53 @@ video_capture = cv2.VideoCapture(0)
 #print(predicted_label)
 
 # functions
-def DetectFace(image):
-    # Detect the faces
-    faces = face_recognition.face_locations(image)
+def facecrop(img):
+    facedata = "haarcascade_frontalface_alt.xml"
+    cascade = cv2.CascadeClassifier(facedata)
+
+#    minisize = (img.shape[1],img.shape[0])
+#    miniframe = cv2.resize(img, minisize)
+
+#    faces = cascade.detectMultiScale(miniframe)
+    faces = cascade.detectMultiScale(
+        img,
+        scaleFactor=1.1,
+        minNeighbors=5,
+        minSize=(30, 30),
+        flags = cv2.CASCADE_SCALE_IMAGE
+    )
+
     pprint(faces)
+    for f in faces:
+        x, y, w, h = [ v for v in f ]
+        cv2.rectangle(img, (x,y), (x+w,y+h), (255,255,255))
 
-    return faces
+        sub_face = img[y:y+h, x:x+w]
+        print('saving file ..')
+        cv2.imwrite("./cropped.jpg", sub_face)
 
-def faceCrop(image,boxScale=1):
-    # Select one of the haarcascade files:
-    #   haarcascade_frontalface_alt.xml  <-- Best one?
-    #   haarcascade_frontalface_alt2.xml
-    #   haarcascade_frontalface_alt_tree.xml
-    #   haarcascade_frontalface_default.xml
-    #   haarcascade_profileface.xml
-    faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
 
-    faces=DetectFace(image)
-    if faces:
-        #n=1
-        for face in faces:
-            croppedImage=imgCrop(pil_im, face[0],boxScale=boxScale)
-            croppedImage.save('./test_crop.jpg')
-            return croppedImage
-            #fname,ext=os.path.splitext(img)
-            #croppedImage.save(fname+'_crop'+str(n)+ext)
-            #n+=1
-    else:
-        #print('No faces found:', img)
-        return False
 
-def pil2cvGrey(pil_im):
-    # Convert a PIL image to a greyscale cv image
-    # from: http://pythonpath.wordpress.com/2012/05/08/pil-to-opencv-image/
-    pil_im = pil_im.convert('L')
-    cv_im = cv2.CreateImageHeader(pil_im.size, cv.IPL_DEPTH_8U, 1)
-    cv.SetData(cv_im, pil_im.tostring(), pil_im.size[0]  )
-    return cv_im
-
-def cv2pil(cv_im):
-    # Convert the cv image to a PIL image
-    return Image.fromstring("L", cv.GetSize(cv_im), cv_im.tostring())
-
-def imgCrop(image, cropBox, boxScale=1):
-    # Crop a PIL image with the provided box [x(left), y(upper), w(width), h(height)]
-
-    # Calculate scale factors
-    xDelta=max(cropBox[2]*(boxScale-1),0)
-    yDelta=max(cropBox[3]*(boxScale-1),0)
-
-    # Convert cv box to PIL box [left, upper, right, lower]
-    PIL_box=[cropBox[0]-xDelta, cropBox[1]-yDelta, cropBox[0]+cropBox[2]+xDelta, cropBox[1]+cropBox[3]+yDelta]
-
-    return image.crop(PIL_box)
-
+    return
 
 while True:
     # Grab a single frame of video
     ret, frame = video_capture.read()
     
-    face_crop = faceCrop(frame)
-    face_image = cv2.resize(face_crop, (48,48))
-    #face_image = cv2.cvtColor(face_image, cv2.COLOR_BGR2GRAY)
+#    face_crop = facecrop(frame)
+    face_image = cv2.resize(frame, (48,48))
+    face_image = cv2.cvtColor(face_image, cv2.COLOR_BGR2GRAY)
     face_image = np.reshape(face_image, [1, face_image.shape[0], face_image.shape[1], 1])
     predicted_class = np.argmax(model.predict(face_image))
     label_map = dict((v,k) for k,v in emotion_dict.items())
     predicted_label = label_map[predicted_class]
     print(predicted_label)
+
+#ret, frame = video_capture.read()
+#gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+#cv2.imwrite('test.jpg', gray)
+#facecrop(gray)
+#print('done')
 
 # Release handle to the webcam
 video_capture.release()
