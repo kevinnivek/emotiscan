@@ -30,7 +30,7 @@ while True:
     # Capture frame-by-frame
     ret, frame = video_capture.read()
 
-    # Only process every 10th frame 
+    # Only process every Nth frame 
     # 10 = 25-35% CPU on all cores
     # Ideal number = 20
     if (feed_counter == 20):
