@@ -8,9 +8,10 @@ The objective is to interact with the participant by recognizing their face, pot
 
 A chained set of matrix LED devices will then be used to respond to the participant, based on their detected face and detected emotion. Ultimately the experience by the participant will be immersive in nature by bridging the gap between people and the machines they use in every day life. If a machine can not only recognize their face, but interpret their emotions then the connection between machines and humans deepens to an almost philsophical level.
 
-Because this project utilizes an open source machine learning platform, it can technically learn, evolve and grow to become smarter at not only detecting faces but reading the multitude of expressive emotional tendencies that all humans may have. The intricacies in human emotional expression goes far beyond simply "Angry" or "Sad" and can encompass the endless grey in between.
+Because this project utilizes an open source machine learning platform, it can technically learn, evolve and grow to become smarter at not only detecting faces but reading the multitude of expressive emotional tendencies that all humans may have. The intricacies in human emotional expression goes far beyond one simply being "Angry" or "Sad". We ca teach systems like the one designed here to interpret the endless greys in between rudimentary or basic emotions.
 
-This project is ultimately intended to encourage everyone to ask themselves where we must draw the line with interpretive recognition and analytics. The structure of privacy and personal protection laws can barely keep up with the evolving (and inexpensive) technology that can be purchased for $20. For $20 anyone can set up and implenent a mass surveilance system to catalog, inventory, recognize and interpret your facial expressions. 
+Ultimately the intention of this project is to encourage everyone to ask themselves where we must draw the line with interpretive recognition and analytics. The structure of privacy and personal protection laws can barely keep up with the evolving (and inexpensive) technology that can be purchased for $20. The resulting conclusion is that anyone can set up and implenent a mass surveilance system to catalog, inventory, recognize and interpret your facial expressions. 
+
 
 ## Hardware Dependencies
 
