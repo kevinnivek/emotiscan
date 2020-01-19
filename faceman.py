@@ -47,7 +47,7 @@ while True:
     )
 
     face_crop = facecrop(faces,gray)
-    if face_crop.shape:
+    if face_crop is not None:
         face_image = np.reshape(face_crop, [1, face_crop.shape[0], face_crop.shape[1], 1])
         predicted_class = np.argmax(model.predict(face_image))
         label_map = dict((v,k) for k,v in emotion_dict.items())
