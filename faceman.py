@@ -30,10 +30,7 @@ def facecrop(faces, image):
 
         sub_face = image[y:y+h, x:x+w]
         sub_face = cv2.resize(sub_face, (48,48))
-        #cv2.imwrite("cropped_"+str(counter)+'.jpg', sub_face)
-        #counter += 1
         return sub_face
-#    return 
 
 while True:
     # Capture frame-by-frame
@@ -50,9 +47,6 @@ while True:
     )
 
     face_crop = facecrop(faces,gray)
-
-#    face_image = cv2.resize(face_crop, (48,48))
-#    face_image = cv2.cvtColor(face_image, cv2.COLOR_BGR2GRAY)
     face_image = np.reshape(face_crop, [1, face_crop.shape[0], face_crop.shape[1], 1])
     predicted_class = np.argmax(model.predict(face_image))
     label_map = dict((v,k) for k,v in emotion_dict.items())
