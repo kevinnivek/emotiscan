@@ -10,7 +10,7 @@ A chained set of matrix LED devices will then be used to respond to the particip
 
 Because this project utilizes an open source machine learning platform, it can technically learn, evolve and grow to become smarter at not only detecting faces but reading the multitude of expressive emotional tendencies that all humans may have. The intricacies in human emotional expression goes far beyond one simply being "Angry" or "Sad". We ca teach systems like the one designed here to interpret the endless greys in between rudimentary or basic emotions.
 
-Ultimately the intention of this project is to encourage everyone to ask themselves where we must draw the line with interpretive recognition and analytics. The structure of privacy and personal protection laws can barely keep up with the evolving (and inexpensive) technology that can be purchased for $20. The resulting conclusion is that anyone can set up and implenent a mass surveilance system to catalog, inventory, recognize and interpret your facial expressions. 
+Ultimately the intention of this project is to encourage everyone to ask themselves where we must draw the line with interpretive facial & emotional recognition. The structure of privacy and personal protection laws can barely keep up with the evolving (and inexpensive) technology that can be purchased for $20. The resulting conclusion is that anyone can set up and implenent a mass surveilance system to catalog, inventory, recognize and interpret your facial expressions. If anyone can set up a system to do this, what do limits do multinational companies like Facebook and Google have? 
 
 
 ## Hardware Dependencies
