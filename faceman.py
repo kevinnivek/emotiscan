@@ -5,6 +5,10 @@ from pprint import pprint
 import numpy as np
 import keras
 from keras.models import load_model
+from samplebase import SampleBase
+from rgbmatrix import graphics
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
+import time
 
 # Initialize some variables
 face_locations = []
@@ -12,11 +16,20 @@ face_encodings = []
 face_names = []
 process_this_frame = True
 model = load_model("./emotions/model_v6_23.hdf5")
-emotion_dict= {'Angry': 0, 'Sad': 5, 'Neutral': 4, 'Disgust': 1, 'Surprise': 6, 'Fear': 2, 'Happy': 3}
+#emotion_dict= {'Angry': 0, 'Sad': 5, 'Neutral': 4, 'Disgust': 1, 'Surprise': 6, 'Fear': 2, 'Happy': 3}
+emotion_dict= {'>:(': 0, ':(': 5, ':|': 4, ':X': 1, ':O': 6, '<:(': 2, ':D': 3}
 cascPath = "./cascades/haarcascade_frontalface_alt.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 feed_counter = 0
 video_capture = cv2.VideoCapture(0)
+
+# Configuration for the matrix
+options = RGBMatrixOptions()
+options.rows = 32
+options.chain_length = 1
+options.parallel = 1
+options.hardware_mapping = 'adafruit-hat'  # If you have an Adafruit HAT: 'adafruit-hat'
+matrix = RGBMatrix(options = options)
 
 def facecrop(faces, image):
     for f in faces:
@@ -50,7 +63,13 @@ while True:
                 label_map = dict((v,k) for k,v in emotion_dict.items())
                 predicted_label = label_map[predicted_class]
                 print(predicted_label)
-                # TODO : INTERACT WITH MATRIX LEDS
+                canvas = matrix
+                font = graphics.Font()
+                font.LoadFont("./fonts/7x13.bdf")
+                blue = graphics.Color(0, 0, 255)
+                matrix.Clear()
+                graphics.DrawText(canvas, font, 2, 10, blue, predicted_label)
+                time.sleep(0.02)
         feed_counter = 0
     feed_counter += 1
 
