@@ -1,8 +1,8 @@
-# Faceman : An interactive art project
+# Emotiscan : An interactive art project
 
 ## Introduction
 
-"Faceman" was concieved as an art installation project to combine AI based facial and facial expression (or emotion) detection with an immersive experience using multiple chained matrix LED output devices. This repository is an implementation of emotion recognition using [Deep Convolutional Neural Networks](https://github.com/atulapra/Emotion-detection/blob/master/ResearchPaper.pdf).
+"Emotiscan" was concieved as an art installation project to combine AI based facial and facial expression (or emotion) detection with an immersive experience using multiple chained matrix LED output devices. This repository is an implementation of emotion recognition using [Deep Convolutional Neural Networks](https://github.com/atulapra/Emotion-detection/blob/master/ResearchPaper.pdf).
 
 The objective is to interact with the participant by recognizing their face, potentially matching with a pre-built database of matched faces, then scanning their face to determine what expressive emotion they may be conveying.
 
