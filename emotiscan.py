@@ -27,17 +27,21 @@ video_capture = cv2.VideoCapture(0)
 
 # Configuration for the matrix
 options = RGBMatrixOptions()
-options.rows = 32
+options.rows = 32 
+options.cols = 64
 options.chain_length = 1
-options.parallel = 1
-#options.hardware_mapping = 'adafruit-hat'  # If you have an Adafruit HAT: 'adafruit-hat'
+options.parallel = 1 
+
+options.hardware_mapping = 'adafruit-hat'  # If you have an Adafruit HAT: 'adafruit-hat'
 #options.pwm_bits = 1
 #options.pwm_dither_bits = 2
-options.gpio_slowdown = 2
+
+options.gpio_slowdown = 4
 matrix = RGBMatrix(options = options)
 canvas = matrix
 font = graphics.Font()
-font.LoadFont("./fonts/10x20.bdf")
+#font.CharacterWidth(60)
+font.LoadFont("./fonts/custom4.bdf")
 color = graphics.Color(125, 125, 255)
 
 def facecrop(faces, image):
@@ -77,7 +81,7 @@ while True:
                 pprint(label_map)
                 print(predicted_label)
                 canvas.Clear()
-                graphics.DrawText(canvas, font, 2, 20, color, predicted_label)
+                graphics.DrawText(canvas, font, 5, 45, color, predicted_label)
                 #time.sleep(0.02)
         feed_counter = 0
     feed_counter += 1
